@@ -33,23 +33,24 @@ ThinkSmart View 并不是消费级平板——它是一台 8 英寸的 Teams 会
 
 ## 设备规格
 
-| 部件 | 详情 |
-|---|---|
-| 型号 | Lenovo ThinkSmart View **CD-18781Y**(有 Teams / Zoom 版本) |
-| SoC | 高通 APQ8053 / MSM8953(骁龙 625 级别,八核 Cortex-A53) |
-| 内存 | 2 GB LPDDR3 |
-| 存储 | 8 GB eMMC |
-| 屏幕 | 8 英寸 IPS 触摸屏,DSI 接口 |
-| 音频功放 | 德州仪器 TAS5782M(I2S Class-D) |
-| WiFi / 蓝牙 | 高通 QCA9379(ath10k_sdio) |
-| 传感器 | BMA253 加速度计、VCNL4200 距离/环境光传感器 |
-| 摄像头 | 硬件指向三星 S5KC505A(驱动仍在研究中) |
-| 接口 | USB-C(在底部橡胶垫下)、圆口电源 |
-| 电池/基带 | 无——会议一体机,市电供电 |
+| 部件        | 详情                                                       |
+| ----------- | ---------------------------------------------------------- |
+| 型号        | Lenovo ThinkSmart View **CD-18781Y**(有 Teams / Zoom 版本) |
+| SoC         | 高通 APQ8053 / MSM8953(骁龙 625 级别,八核 Cortex-A53)      |
+| 内存        | 2 GB LPDDR3                                                |
+| 存储        | 8 GB eMMC                                                  |
+| 屏幕        | 8 英寸 IPS 触摸屏,DSI 接口                                 |
+| 音频功放    | 德州仪器 TAS5782M(I2S Class-D)                             |
+| WiFi / 蓝牙 | 高通 QCA9379(ath10k_sdio)                                  |
+| 传感器      | BMA253 加速度计、VCNL4200 距离/环境光传感器                |
+| 摄像头      | 硬件指向三星 S5KC505A(驱动仍在研究中)                      |
+| 接口        | USB-C(在底部橡胶垫下)、圆口电源                            |
+| 电池/基带   | 无——会议一体机,市电供电                                    |
 
 **已知短板**:2 GB 内存。复杂网页应用会偏慢；跑仪表盘和 Kiosk 完全够用。
 
 **进入 EDL(紧急下载)模式**——最重要的技巧:
+
 1. 拔掉电源。
 2. 同时按住 **音量+ 和 音量−**。
 3. 重新插上电源(用智能插座更方便)。
@@ -59,18 +60,18 @@ ThinkSmart View 并不是消费级平板——它是一台 8 英寸的 Teams 会
 
 ## 选择你的路线
 
-| 你的目标 | 推荐方案 | 说明 |
-|---|---|---|
-| HA 仪表盘 / Kiosk | [Lineage 15.1(Android 8.1)](#操作系统与-rom) | 最成熟;可跑 Fully Kiosk、View Assist、Play Store(pico GApps) |
-| 真正的 Linux 桌面 | [Ubuntu 24.04 + Plasma 6](#操作系统与-rom) | 扬声器/麦克风/蓝牙/旋转/靠近唤醒均可用;摄像头还在研究 |
-| Mainline Linux / Alpine、深度折腾 | [postmarketOS](#操作系统与-rom) | FelixKa 的原始 PMOS 移植,也是 Ubuntu 移植的基础 |
-| 最小改动、保留原生系统 | [ROOT / Magisk 路线](#刷机教程) | 通过 microG 装 Play Store、更新 WebView、换启动器 |
+| 你的目标                          | 推荐方案                                     | 说明                                                         |
+| --------------------------------- | -------------------------------------------- | ------------------------------------------------------------ |
+| HA 仪表盘 / Kiosk                 | [Lineage 15.1(Android 8.1)](#操作系统与-rom) | 最成熟;可跑 Fully Kiosk、View Assist、Play Store(pico GApps) |
+| 真正的 Linux 桌面                 | [Ubuntu 24.04 + Plasma 6](#操作系统与-rom)   | 扬声器/麦克风/蓝牙/旋转/靠近唤醒均可用;摄像头还在研究        |
+| Mainline Linux / Alpine、深度折腾 | [postmarketOS](#操作系统与-rom)              | FelixKa 的原始 PMOS 移植,也是 Ubuntu 移植的基础              |
+| 最小改动、保留原生系统            | [ROOT / Magisk 路线](#刷机教程)              | 通过 microG 装 Play Store、更新 WebView、换启动器            |
 
 ## 操作系统与 ROM
 
 - [LineageOS 15.1 for ThinkSmart View(`starfire`)](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire.zip) — @deadman(deadman96385)与 @electimon 制作的非官方 Lineage 15.1(Android 8.1)。修复了早期版本浏览器无声音、触控超时、Android 11 换启动器崩溃等问题。**仪表盘/Kiosk 用途的首选系统。** 偶尔还有更新,但不要指望官方支持。
 - [Ubuntu 24.04 for ThinkSmart View](https://github.com/rickx/ubuntu-thinksmart) — 定制 Ubuntu 24.04 ARM64 移植,内核 6.19.5-msm8953。主推镜像为 Plasma Mobile 6(KDE neon 6.7.0)。扬声器、麦克风、蓝牙、加速度计自动旋转、亮度滑条、靠近唤醒全部可用;Venus V4L2 硬解(H.264 1080p 约 1.26 倍实时,HEVC 约 5.7 倍);摄像头驱动研究中。
-- [postmarketOS 设备页:lenovo-starfire](https://wiki.postmarketos.org/wiki/Lenovo_ThinkSmart_View_(lenovo-starfire)) — FelixKa 的原始 PMOS(Alpine Linux)移植,包含后来所有工作所依赖的 TAS5782M 音频驱动参考实现。设备包:`device-lenovo-starfire`(pmaports)。
+- [postmarketOS 设备页:lenovo-starfire](<https://wiki.postmarketos.org/wiki/Lenovo_ThinkSmart_View_(lenovo-starfire)>) — FelixKa 的原始 PMOS(Alpine Linux)移植,包含后来所有工作所依赖的 TAS5782M 音频驱动参考实现。设备包:`device-lenovo-starfire`(pmaports)。
 - **原厂安卓(Teams / "Teams & Others")** — 一切刷机的基础。先刷 `200628.084` 版本回到已知良好的状态(见[固件下载](#固件与镜像下载));泄露的 userdebug 版本可在 设置 → 关于 → 连点固件版本 后开启 ADB。
 
 ## 刷机教程
@@ -103,16 +104,16 @@ ThinkSmart View 并不是消费级平板——它是一台 8 英寸的 Teams 会
 
 ## 固件与镜像下载
 
-| 文件 | 说明 | 链接 |
-|---|---|---|
-| `CD-18781Y.200628.084.zip` | 原厂 "Teams & Others" 固件(所有刷机的已知良好起点) | [wasabisys 镜像](https://s3.wasabisys.com/filestash-buk/lenovo-thinksmart-view/CD-18781Y.200628.084.zip) |
-| `lineage-15.1-20240531-UNOFFICIAL-starfire.zip` | Lineage 15.1 系统包 | [wasabisys 镜像](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire.zip) |
-| `lineage-15.1-20240531-UNOFFICIAL-starfire-recovery.img` | Lineage recovery(刷入 `recovery` 分区) | [wasabisys 镜像](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire-recovery.img) |
-| `open_gapps-arm-8.1-pico-20220215.zip` | 谷歌服务(pico 是不扩分区能装的最大版本;nano 也可以) | [OpenGApps SourceForge](https://sourceforge.net/projects/opengapps/files/arm/20220215/) |
-| `plasma6-ubuntu-qcom-msm8953.img` | Ubuntu 24.04 + Plasma Mobile 6 镜像 | 见 [rickx/ubuntu-thinksmart](https://github.com/rickx/ubuntu-thinksmart) README(MEGA) |
-| `bootstrap-pmos-ssh-generic-qcom-msm8953.img` | 带 SSH 的 PMOS 引导镜像(用于重写 GPT) | [GitHub Release](https://github.com/rickx/ubuntu-thinksmart/releases)(资产 `bootstrap-2026-05-22`) |
-| `lk2nd.img` | lk2nd 二级引导 | [rickx/ubuntu-thinksmart prebuilt](https://github.com/rickx/ubuntu-thinksmart/tree/main/prebuilt) |
-| Rescue & Smart Assistant (RSA) | 联想官方工具,可恢复原厂固件 | [联想支持站点](https://support.lenovo.com) |
+| 文件                                                     | 说明                                                | 链接                                                                                                                                            |
+| -------------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CD-18781Y.200628.084.zip`                               | 原厂 "Teams & Others" 固件(所有刷机的已知良好起点)  | [wasabisys 镜像](https://s3.wasabisys.com/filestash-buk/lenovo-thinksmart-view/CD-18781Y.200628.084.zip)                                        |
+| `lineage-15.1-20240531-UNOFFICIAL-starfire.zip`          | Lineage 15.1 系统包                                 | [wasabisys 镜像](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire.zip)          |
+| `lineage-15.1-20240531-UNOFFICIAL-starfire-recovery.img` | Lineage recovery(刷入 `recovery` 分区)              | [wasabisys 镜像](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire-recovery.img) |
+| `open_gapps-arm-8.1-pico-20220215.zip`                   | 谷歌服务(pico 是不扩分区能装的最大版本;nano 也可以) | [OpenGApps SourceForge](https://sourceforge.net/projects/opengapps/files/arm/20220215/)                                                         |
+| `plasma6-ubuntu-qcom-msm8953.img`                        | Ubuntu 24.04 + Plasma Mobile 6 镜像                 | 见 [rickx/ubuntu-thinksmart](https://github.com/rickx/ubuntu-thinksmart) README(MEGA)                                                           |
+| `bootstrap-pmos-ssh-generic-qcom-msm8953.img`            | 带 SSH 的 PMOS 引导镜像(用于重写 GPT)               | [GitHub Release](https://github.com/rickx/ubuntu-thinksmart/releases)(资产 `bootstrap-2026-05-22`)                                              |
+| `lk2nd.img`                                              | lk2nd 二级引导                                      | [rickx/ubuntu-thinksmart prebuilt](https://github.com/rickx/ubuntu-thinksmart/tree/main/prebuilt)                                               |
+| Rescue & Smart Assistant (RSA)                           | 联想官方工具,可恢复原厂固件                         | [联想支持站点](https://support.lenovo.com)                                                                                                      |
 
 ## 源码与开发
 
@@ -171,18 +172,18 @@ ThinkSmart View 并不是消费级平板——它是一台 8 英寸的 Teams 会
 
 ## 常见问题排错
 
-| 症状 | 解决办法 |
-|---|---|
-| QFIL 报 `Sahara` 错误 / 刷一分钟左右失败 | 换 USB 2.0 口和线;进入 EDL 后立即下载;禁用驱动签名(测试模式) |
-| QFIL 识别不到端口 | 重装 HS-USB QDLoader 驱动;看设备管理器;secure boot 可能拦截驱动(临时关闭) |
-| `adb: sideload connection failed` / `E1001` | ADB sideload 超时很快——每次侧载前重新选择;重启进 recovery 重试 |
-| Lineage 初始设置卡在 "Checking for updates" | 几秒后按返回键(另一层检查页会滑入;此时按返回即可继续) |
-| Lineage WiFi 掉线直到重启 | 开关一次 WiFi;开着 Fully Kiosk 似乎不会复现;有人每晚定时重启 Kiosk |
-| Lineage 旋转卡住 | 开关一次自动旋转(已知 bug,暂无根治) |
-| 原生固件总是重置设置 | 卸载 MDM/ kiosk / managed-settings 包:`adb shell pm uninstall -k --user 0 <包名>` |
-| Ubuntu:WiFi 在 GTK 重连时断开 | 镜像已修复(打过补丁的 ath10k_core.ko);dmesg 里的警告可忽略 |
-| Ubuntu:睡眠后屏幕唤不醒 | 永远不要开启 powerdevil 显示超时(DSI DRM Off 不可恢复);使用内置守护进程 |
-| 变砖 / 想刷回原厂 | 联想 Rescue & Smart Assistant(记得还是用 USB 2.0 口) |
+| 症状                                        | 解决办法                                                                          |
+| ------------------------------------------- | --------------------------------------------------------------------------------- |
+| QFIL 报 `Sahara` 错误 / 刷一分钟左右失败    | 换 USB 2.0 口和线;进入 EDL 后立即下载;禁用驱动签名(测试模式)                      |
+| QFIL 识别不到端口                           | 重装 HS-USB QDLoader 驱动;看设备管理器;secure boot 可能拦截驱动(临时关闭)         |
+| `adb: sideload connection failed` / `E1001` | ADB sideload 超时很快——每次侧载前重新选择;重启进 recovery 重试                    |
+| Lineage 初始设置卡在 "Checking for updates" | 几秒后按返回键(另一层检查页会滑入;此时按返回即可继续)                             |
+| Lineage WiFi 掉线直到重启                   | 开关一次 WiFi;开着 Fully Kiosk 似乎不会复现;有人每晚定时重启 Kiosk                |
+| Lineage 旋转卡住                            | 开关一次自动旋转(已知 bug,暂无根治)                                               |
+| 原生固件总是重置设置                        | 卸载 MDM/ kiosk / managed-settings 包:`adb shell pm uninstall -k --user 0 <包名>` |
+| Ubuntu:WiFi 在 GTK 重连时断开               | 镜像已修复(打过补丁的 ath10k_core.ko);dmesg 里的警告可忽略                        |
+| Ubuntu:睡眠后屏幕唤不醒                     | 永远不要开启 powerdevil 显示超时(DSI DRM Off 不可恢复);使用内置守护进程           |
+| 变砖 / 想刷回原厂                           | 联想 Rescue & Smart Assistant(记得还是用 USB 2.0 口)                              |
 
 ## 社区
 
