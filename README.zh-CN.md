@@ -71,6 +71,7 @@ ThinkSmart View 并不是消费级平板——它是一台 8 英寸的 Teams 会
 
 - [LineageOS 15.1 for ThinkSmart View(`starfire`)](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire.zip) — @deadman(deadman96385)与 @electimon 制作的非官方 Lineage 15.1(Android 8.1)。修复了早期版本浏览器无声音、触控超时、Android 11 换启动器崩溃等问题。**仪表盘/Kiosk 用途的首选系统。** 偶尔还有更新,但不要指望官方支持。
 - [Ubuntu 24.04 for ThinkSmart View](https://github.com/rickx/ubuntu-thinksmart) — 定制 Ubuntu 24.04 ARM64 移植,内核 6.19.5-msm8953。主推镜像为 Plasma Mobile 6(KDE neon 6.7.0)。扬声器、麦克风、蓝牙、加速度计自动旋转、亮度滑条、靠近唤醒全部可用;Venus V4L2 硬解(H.264 1080p 约 1.26 倍实时,HEVC 约 5.7 倍);摄像头驱动研究中。
+- [thinksmart-ubuntu-image(小智语音助手)](https://github.com/justhalfbit/thinksmart-ubuntu-image) — 基于 rickx 移植构建的 Ubuntu 24.04 镜像,去掉 Plasma 桌面,开机直达本地语音助手:「小麦小麦」唤醒词、本机语音识别、可接 Claude / DeepSeek 等大模型,带网页管理后台。包含设备修复(双麦克风、扬声器、熄屏、接近唤醒、WiFi 稳定性、GPU 白屏补丁)和一份同时面向人类与 AI 助手的完整刷机教程。界面与唤醒词目前以中文为主。
 - [postmarketOS 设备页:lenovo-starfire](<https://wiki.postmarketos.org/wiki/Lenovo_ThinkSmart_View_(lenovo-starfire)>) — FelixKa 的原始 PMOS(Alpine Linux)移植,包含后来所有工作所依赖的 TAS5782M 音频驱动参考实现。设备包:`device-lenovo-starfire`(pmaports)。
 - **原厂安卓(Teams / "Teams & Others")** — 一切刷机的基础。先刷 `200628.084` 版本回到已知良好的状态(见[固件下载](#固件与镜像下载));泄露的 userdebug 版本可在 设置 → 关于 → 连点固件版本 后开启 ADB。
 
@@ -81,6 +82,7 @@ ThinkSmart View 并不是消费级平板——它是一台 8 英寸的 Teams 会
 - [XDA:[GUIDE][ROOT] Unlocking and Improving Your Lenovo ThinkSmart View (CD-18781Y)](https://xdaforums.com/t/guide-root-unlocking-and-improving-your-lenovo-thinksmart-view-cd-18781y.4584033/) — 最初的 ROOT 教程(Chewie610,基于 deadman96385 的固件/工具):QFIL 刷机、TWRP、Magisk、microG + Play Store、WebView Manager。想留在类原生安卓就走这条。
 - [Home Assistant 社区:Lenovo ThinkSmart View ROM/OS Development](https://community.home-assistant.io/t/lenovo-thinksmart-view-rom-os-development/676324) — 大部分生态动态所在的大型讨论帖(安卓 8.1/11 固件、PMOS、Ubuntu、仪表盘)。很长但必读。
 - [在 VirtualBox 虚拟机里刷机](https://github.com/pgale/lineage_15.1_Installation_TSV/discussions/43) — 宿主机 USB 直通搞不定时的替代方案。
+- thinksmart-ubuntu-image 刷机教程 — 路线 A(原厂 → lk2nd → bootstrap → 改分区表 → 刷镜像)与路线 B(在已有 Ubuntu 上重刷)的完整流程,含校验和核对、整盘 eMMC 备份、首次开机设置、排错和用户数据备份/还原。仓库链接见上文操作系统一节。
 
 ### 刷机速查表(摘自上述教程)
 
@@ -110,7 +112,8 @@ ThinkSmart View 并不是消费级平板——它是一台 8 英寸的 Teams 会
 | `lineage-15.1-20240531-UNOFFICIAL-starfire.zip`          | Lineage 15.1 系统包                                 | [wasabisys 镜像](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire.zip)          |
 | `lineage-15.1-20240531-UNOFFICIAL-starfire-recovery.img` | Lineage recovery(刷入 `recovery` 分区)              | [wasabisys 镜像](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire-recovery.img) |
 | `open_gapps-arm-8.1-pico-20220215.zip`                   | 谷歌服务(pico 是不扩分区能装的最大版本;nano 也可以) | [OpenGApps SourceForge](https://sourceforge.net/projects/opengapps/files/arm/20220215/)                                                         |
-| `plasma6-ubuntu-qcom-msm8953.img`                        | Ubuntu 24.04 + Plasma Mobile 6 镜像                 | 见 [rickx/ubuntu-thinksmart](https://github.com/rickx/ubuntu-thinksmart) README(MEGA)                                                           |
+| `plasma6-ubuntu-qcom-msm8953.img`                        | Ubuntu 24.04 + Plasma Mobile 6 镜像                 |
+| `thinksmart-ubuntu-*.img.xz`                             | 语音助手 Ubuntu 镜像(小智,无桌面)                   | [GitHub Releases](https://github.com/justhalfbit/thinksmart-ubuntu-image/releases)                                                              |     | 见 [rickx/ubuntu-thinksmart](https://github.com/rickx/ubuntu-thinksmart) README(MEGA) |
 | `bootstrap-pmos-ssh-generic-qcom-msm8953.img`            | 带 SSH 的 PMOS 引导镜像(用于重写 GPT)               | [GitHub Release](https://github.com/rickx/ubuntu-thinksmart/releases)(资产 `bootstrap-2026-05-22`)                                              |
 | `lk2nd.img`                                              | lk2nd 二级引导                                      | [rickx/ubuntu-thinksmart prebuilt](https://github.com/rickx/ubuntu-thinksmart/tree/main/prebuilt)                                               |
 | Rescue & Smart Assistant (RSA)                           | 联想官方工具,可恢复原厂固件                         | [联想支持站点](https://support.lenovo.com)                                                                                                      |
@@ -158,6 +161,7 @@ ThinkSmart View 并不是消费级平板——它是一台 8 英寸的 Teams 会
 - Linux 触控面板 — Ubuntu/PMOS 镜像使其成为通用 ARM64 平板(USB 网络 + SSH 可无人值守)。
 - 摄像头监视器 / RTSP 播放器 — Venus 硬解可播 1080p H.264 摄像头流(编码时不要用 B 帧:`-bf 0`)。
 - 电子相框 / Kiosk / 信息展示屏 — Fully Kiosk 屏保,或 PMOS/Ubuntu 下的纯浏览器方案。
+- 本地语音助手 — 基于小智(xiaozhi)的 Ubuntu 镜像让 TSV 变成常驻唤醒词语音助手:本机语音识别,大模型后端可自选(仓库链接见上文操作系统一节)。
 
 ## 硬件研究与折腾
 

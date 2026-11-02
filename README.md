@@ -69,6 +69,7 @@ Note: fastboot exists but **cannot flash** — the bootloader is OEM-locked and 
 
 - LineageOS 15.1 for ThinkSmart View (`starfire`) - Unofficial Lineage 15.1 (Android 8.1) build by @deadman (deadman96385) with @electimon. Fixes the audio-in-browser, touchscreen timeout, and A11 launcher-crash issues that plagued earlier builds. **The recommended OS for dashboard/kiosk use.** Still receives occasional fixes; do not expect official support.
 - [Ubuntu 24.04 for ThinkSmart View](https://github.com/rickx/ubuntu-thinksmart) - Custom Ubuntu 24.04 ARM64 port, kernel 6.19.5-msm8953. Primary image is Plasma Mobile 6 (KDE neon 6.7.0). Speaker audio, mic, Bluetooth, accelerometer auto-rotation, brightness slider, and proximity wake all working; hardware video decode via Venus V4L2 (H.264 1080p ~1.26× realtime, HEVC ~5.7×); camera driver research in progress.
+- [thinksmart-ubuntu-image (xiaozhi voice assistant)](https://github.com/justhalfbit/thinksmart-ubuntu-image) - Ubuntu 24.04 image built on rickx's port with the Plasma desktop removed: boots straight into a local voice assistant (「小麦小麦」 wake word, on-device speech recognition, Claude / DeepSeek and other LLM backends, web admin panel). Includes device fixes (both mics, speaker, screen blanking, proximity wake, WiFi stability, GPU white-screen patches) and a complete flashing tutorial written for both humans and AI agents. UI and wake word are Chinese-focused for now.
 - [postmarketOS device: lenovo-starfire](https://wiki.postmarketos.org/wiki/Lenovo_ThinkSmart_View_%28lenovo-starfire%29) - Original PMOS (Alpine Linux) bring-up by FelixKa, including the TAS5782M audio driver reference that later work builds on. Device package: `device-lenovo-starfire` in pmaports.
 - Stock Android (Teams / "Teams & Others") - The base firmware everything starts from. Flash the `200628.084` build first to get a known-good state (see the firmware table below); the leaked userdebug build enables ADB unlock via Settings → About → tap firmware version repeatedly.
 
@@ -78,6 +79,7 @@ Note: fastboot exists but **cannot flash** — the bootloader is OEM-locked and 
 - [rickx/ubuntu-thinksmart FLASHING.md](https://github.com/rickx/ubuntu-thinksmart/blob/main/FLASHING.md) - Full stock-Android to Ubuntu flow via EDL: flash `lk2nd`, flash an SSH-capable PMOS bootstrap image, rewrite the GPT on-device with `apply-ubuntu-gpt.sh`, then flash the Ubuntu image. Includes WiFi pre-injection so the device is SSH-able on first boot.
 - [XDA Guide: Root and Improve Your ThinkSmart View](https://xdaforums.com/t/guide-root-unlocking-and-improving-your-lenovo-thinksmart-view-cd-18781y.4584033/) - The original root guide (Chewie610, building on deadman96385's firmware/tools): QFIL flashing, TWRP, Magisk, microG + Play Store, WebView Manager. Use this if you want to stay on stock-ish Android.
 - [Flashing from within a VirtualBox VM](https://github.com/pgale/lineage_15.1_Installation_TSV/discussions/43) - Alternative when you can't get USB passthrough working on your host.
+- thinksmart-ubuntu-image flashing guide - Route A (stock → lk2nd → bootstrap → GPT rewrite → image) and Route B (re-flash over an existing Ubuntu) walkthrough with checksum verification, full-eMMC backup steps, first-boot setup, troubleshooting, and user-data backup/restore. The repo is linked in the Operating Systems section above.
 
 ### Flashing cheat-sheet (condensed from the guides)
 
@@ -107,7 +109,8 @@ Note: fastboot exists but **cannot flash** — the bootloader is OEM-locked and 
 | `lineage-15.1-...-starfire.zip`               | Lineage 15.1 system                                                | [wasabisys mirror](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire.zip)          |
 | `lineage-15.1-...-starfire-recovery.img`      | Lineage recovery (flash to `recovery` partition)                   | [wasabisys mirror](https://s3.us-west-1.wasabisys.com/rom-release/LineageOS/15.1/starfire/lineage-15.1-20240531-UNOFFICIAL-starfire-recovery.img) |
 | `open_gapps-arm-8.1-pico-20220215.zip`        | Google Play (pico is the largest that fits stock partition)        | [OpenGApps SourceForge](https://sourceforge.net/projects/opengapps/files/arm/20220215/)                                                           |
-| `plasma6-ubuntu-qcom-msm8953.img`             | Ubuntu 24.04 + Plasma Mobile 6 image                               | Link in the ubuntu-thinksmart README (MEGA)                                                                                                       |
+| `plasma6-ubuntu-qcom-msm8953.img`             | Ubuntu 24.04 + Plasma Mobile 6 image                               |
+| `thinksmart-ubuntu-*.img.xz`                  | Voice-assistant Ubuntu image (xiaozhi, no desktop)                 | [GitHub Releases](https://github.com/justhalfbit/thinksmart-ubuntu-image/releases)                                                                |     | Link in the ubuntu-thinksmart README (MEGA) |
 | `bootstrap-pmos-ssh-generic-qcom-msm8953.img` | SSH-capable PMOS bootstrap for GPT rewrite                         | [GitHub Release](https://github.com/rickx/ubuntu-thinksmart/releases) (asset `bootstrap-2026-05-22`)                                              |
 | `lk2nd.img`                                   | lk2nd secondary bootloader                                         | [prebuilt](https://github.com/rickx/ubuntu-thinksmart/tree/main/prebuilt)                                                                         |
 | Rescue & Smart Assistant (RSA)                | Lenovo's official tool to restore stock firmware                   | [Lenovo Support](https://support.lenovo.com)                                                                                                      |
@@ -152,6 +155,7 @@ Note: fastboot exists but **cannot flash** — the bootloader is OEM-locked and 
 - Linux touch panel - Ubuntu/PMOS images make it a generic ARM64 tablet (USB networking + SSH for headless use).
 - Camera monitor / RTSP viewer - Venus hardware decode handles 1080p H.264 camera streams (encode without B-frames: `-bf 0`).
 - Digital photo frame / kiosk / info display - Fully Kiosk screensavers or a plain browser in PMOS/Ubuntu.
+- Local voice assistant - The xiaozhi-based Ubuntu image turns the TSV into an always-on, wake-word voice assistant with on-device ASR and a choice of LLM backends (repo linked in the Operating Systems section).
 
 ## Hardware Hacking & Research
 
